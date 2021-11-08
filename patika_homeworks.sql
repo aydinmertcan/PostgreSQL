@@ -51,3 +51,13 @@ select * from film f where f.title like '%n' order by f.length desc limit 5;
 select * from film f where f.title like '%n' order by f.length desc offset 5 limit 5;
 -- 3)customer tablosunda bulunan last_name sütununa göre azalan yapılan sıralamada store_id 1 olmak koşuluyla ilk 4 veriyi sıralayınız.
 select * from customer c where c.store_id = 1 order by c.last_name desc limit 4;
+
+--------------------------------------- Homework 6 --------------------------------------- 
+-- 1) film tablosunda bulunan rental_rate sütunundaki değerlerin ortalaması nedir?
+select round(avg(f.rental_rate),3) from film f;
+-- 2) film tablosunda bulunan filmlerden kaç tanesi 'C' karakteri ile başlar?
+select count(*) from film f where f.title like 'C%';
+-- 3) film tablosunda bulunan filmlerden rental_rate değeri 0.99 a eşit olan en uzun (length) film kaç dakikadır?
+select f.length from film f where f.rental_rate = 0.99 order by f.length desc limit 1;
+-- 4) film tablosunda bulunan filmlerin uzunluğu 150 dakikadan büyük olanlarına ait kaç farklı replacement_cost değeri vardır?
+select count (distinct f.replacement_cost) from film f where f.length > 150;
