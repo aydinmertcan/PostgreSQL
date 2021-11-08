@@ -33,13 +33,21 @@ select f.title from film f where f.title ilike '%t%t%t%t%';
 select * from film f where f.title like 'C%' and f.length > 90 and f.rental_rate > 2.99;
 
 --------------------------------------- Homework 4 --------------------------------------- 
--- film tablosunda bulunan replacement_cost sütununda bulunan birbirinden farklı değerleri sıralayınız.
+-- 1) film tablosunda bulunan replacement_cost sütununda bulunan birbirinden farklı değerleri sıralayınız.
 select distinct f.replacement_cost from film f order by f.replacement_cost asc;
--- film tablosunda bulunan replacement_cost sütununda birbirinden farklı kaç tane veri vardır?
+-- 2) film tablosunda bulunan replacement_cost sütununda birbirinden farklı kaç tane veri vardır?
 select count(distinct f.replacement_cost) from film f;
--- film tablosunda bulunan film isimlerinde (title) kaç tanesini T karakteri ile başlar ve aynı zamanda rating 'G' ye eşittir?
+-- 3) film tablosunda bulunan film isimlerinde (title) kaç tanesini T karakteri ile başlar ve aynı zamanda rating 'G' ye eşittir?
 select count(f.title) from film f where f.title like 'T%' and f.rating = 'G';
--- country tablosunda bulunan ülke isimlerinden (country) kaç tanesi 5 karakterden oluşmaktadır?
+-- 4) country tablosunda bulunan ülke isimlerinden (country) kaç tanesi 5 karakterden oluşmaktadır?
 select count (co.country) from country co where co.country like '_____';
--- city tablosundaki şehir isimlerinin kaç tanesi 'R' veya r karakteri ile biter?
+-- 5) city tablosundaki şehir isimlerinin kaç tanesi 'R' veya r karakteri ile biter?
 select count(ci.city) from city ci where ci.city ilike 'R%';
+
+--------------------------------------- Homework 5 --------------------------------------- 
+-- 1) film tablosunda bulunan ve film ismi (title) 'n' karakteri ile biten en uzun (length) 5 filmi sıralayınız.
+select * from film f where f.title like '%n' order by f.length desc limit 5;
+-- 2)film tablosunda bulunan ve film ismi (title) 'n' karakteri ile biten en kısa (length) ikinci(6,7,8,9,10) 5 filmi(6,7,8,9,10) sıralayınız.
+select * from film f where f.title like '%n' order by f.length desc offset 5 limit 5;
+-- 3)customer tablosunda bulunan last_name sütununa göre azalan yapılan sıralamada store_id 1 olmak koşuluyla ilk 4 veriyi sıralayınız.
+select * from customer c where c.store_id = 1 order by c.last_name desc limit 4;
