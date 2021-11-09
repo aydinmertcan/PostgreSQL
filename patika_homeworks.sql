@@ -143,3 +143,11 @@ delete from employee where email = 'example@example.com';
 delete from employee where name = 'Evey';
 delete from employee where birthday = '1984-02-22';
 delete from employee where name like 'Ev%';
+
+--------------------------------------- Homework 9 --------------------------------------- 
+-- 1) city tablosu ile country tablosunda bulunan şehir (city) ve ülke (country) isimlerini birlikte görebileceğimiz INNER JOIN sorgusunu yazınız.
+select ci.city, co.country from city ci inner join country co on ci.country_id = co.country_id ;
+-- 2) customer tablosu ile payment tablosunda bulunan payment_id ile customer tablosundaki first_name ve last_name isimlerini birlikte görebileceğimiz INNER JOIN sorgusunu yazınız.
+select c.first_name, c.last_name from customer as c inner join payment as p on c.customer_id = p.customer_id;
+-- 3) customer tablosu ile rental tablosunda bulunan rental_id ile customer tablosundaki first_name ve last_name isimlerini birlikte görebileceğimiz INNER JOIN sorgusunu yazınız.
+select r.rental_id, c.first_name, c.last_name from customer c inner join rental as r on c.customer_id = r.customer_id;
