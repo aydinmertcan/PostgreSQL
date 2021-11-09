@@ -61,3 +61,13 @@ select count(*) from film f where f.title like 'C%';
 select f.length from film f where f.rental_rate = 0.99 order by f.length desc limit 1;
 -- 4) film tablosunda bulunan filmlerin uzunluğu 150 dakikadan büyük olanlarına ait kaç farklı replacement_cost değeri vardır?
 select count (distinct f.replacement_cost) from film f where f.length > 150;
+
+--------------------------------------- Homework 7 --------------------------------------- 
+-- 1) film tablosunda bulunan filmleri rating değerlerine göre gruplayınız.
+select f.rating, f.title from film f group by f.rating, f.title;
+-- 2) film tablosunda bulunan filmleri replacement_cost sütununa göre grupladığımızda film sayısı 50 den fazla olan replacement_cost değerini ve karşılık gelen film sayısını sıralayınız.
+select f.replacement_cost as "Replacement Cost", count(f.title) as "Film sayısı" from film f group by f.replacement_cost having count(f.title) > 50;
+-- 3) customer tablosunda bulunan store_id değerlerine karşılık gelen müşteri sayılarını nelerdir?
+select cu.store_id, count(customer_id) as "Müşteri Sayısı" from customer cu group by cu.store_id;
+-- 4) city tablosunda bulunan şehir verilerini country_id sütununa göre gruplandırdıktan sonra en fazla şehir sayısı barındıran country_id bilgisini ve şehir sayısını paylaşınız.
+select ci.country_id as "Ülke nosu", count(ci.city) as "Şehir sayısı" from city ci group by ci.country_id order by count(ci.city) desc limit 1;
