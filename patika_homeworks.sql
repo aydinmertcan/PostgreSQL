@@ -156,11 +156,9 @@ select r.rental_id, c.first_name, c.last_name from customer c inner join rental 
 -- 1) city tablosu ile country tablosunda bulunan şehir (city) ve ülke (country) isimlerini
 -- birlikte görebileceğimiz LEFT JOIN sorgusunu yazınız.
 select ci.city, co.country from city ci left join country co on ci.country_id = co.country_id;
-
 -- 2) customer tablosu ile payment tablosunda bulunan payment_id ile customer tablosundaki first_name ve last_name isimlerini
 -- birlikte görebileceğimiz RIGHT JOIN sorgusunu yazınız.
 select p.payment_id,c.first_name,c.last_name from customer c right join payment p on c.customer_id = p.customer_id;
-
 -- 3) customer tablosu ile rental tablosunda bulunan rental_id ile customer tablosundaki first_name ve last_name isimlerini
 --birlikte görebileceğimiz FULL JOIN sorgusunu yazınız.
 select r.rental_id,c.first_name,c.last_name from rental r full join customer c on r.customer_id = c.customer_id;
@@ -174,13 +172,25 @@ union
 (select a.first_name from actor a)
 intersect
 (select c.first_name from customer c);
-
 -- 3) actor ve customer tablolarında bulunan first_name sütunları için ilk tabloda bulunan ancak ikinci tabloda bulunmayan verileri sıralayalım.
 (select a.first_name from actor a)
 except
 (select c.first_name from customer c);
-
 -- 4) İlk 3 sorguyu tekrar eden veriler için de yapalım.
 (select a.first_name from actor a)
 union all
 (select c.first_name from customer c);
+
+--------------------------------------- Homework 12 --------------------------------------- 
+-- 1) film tablosunda film uzunluğu length sütununda gösterilmektedir. Uzunluğu ortalama film uzunluğundan fazla kaç tane film vardır?
+select count(*) from film as f where f.length > (select avg(f.length) from film as f);
+-- 2) film tablosunda en yüksek rental_rate değerine sahip kaç tane film vardır?
+select count(*) from film as f where f.rental_rate = (select max(f.rental_rate) from film as f);
+-- 3) film tablosunda en düşük rental_rate ve en düşün replacement_cost değerlerine sahip filmleri sıralayınız.
+select * from film as f where f.rental_rate = (select min(f.rental_rate) from film as f) and f.replacement_cost = (select min(replacement_cost) from film);
+-- 4) payment tablosunda en fazla sayıda alışveriş yapan müşterileri(customer) sıralayınız.
+select c.first_name,c.last_name,c.customer_id, count(p.payment_id) as "Sipariş Sayısı" from customer c 
+inner join payment p on p.customer_id = c.customer_id 
+group by c.customer_id, p.customer_id
+order by count(p.payment_id) desc;
+
